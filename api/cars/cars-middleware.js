@@ -19,11 +19,20 @@ const checkCarId = async (req, res, next) => {
 }
 
 const checkCarPayload = (req, res, next) => {
-  const error = {status: 400}
   const {vin, make, model, mileage} = req.body;
-  if(!vin || !make || !model || !mileage){
-    error.message = `<field name> is missing`
+  if(!vin){
+    return next({status: 400, message: "vin is missing"})
   }
+  if(!make){
+    return next({status: 400, message: "make is missing"})
+  }
+  if(!model){
+    return next({status: 400, message: "model is missing"})
+  }
+  if(!mileage){
+    return next({status: 400, message: "mileage is missing"})
+  }
+  next()
 }
 
 const checkVinNumberValid = (req, res, next) => {
